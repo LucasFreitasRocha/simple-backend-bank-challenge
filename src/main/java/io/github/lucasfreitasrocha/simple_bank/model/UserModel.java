@@ -7,6 +7,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import java.util.List;
 
 @Entity
 @Table(name = "bank_user")
@@ -30,4 +34,11 @@ public class UserModel {
     private String password;
     @OneToOne(mappedBy = "owner")
     private AccountModel account;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "payer")
+    private List<TransferModel> payments;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "payee")
+    private List<TransferModel> receipts;
 }
+
