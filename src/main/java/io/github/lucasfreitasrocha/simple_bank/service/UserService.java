@@ -7,6 +7,7 @@ import io.github.lucasfreitasrocha.simple_bank.model.UserModel;
 import io.github.lucasfreitasrocha.simple_bank.model.UserType;
 import io.github.lucasfreitasrocha.simple_bank.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -25,8 +26,8 @@ public class UserService {
         model.setDocument(dto.getDocument());
         model.setEmail(dto.getEmail());
         model.setType(UserType.valueOf(dto.getType()));
-        model.setPassword(dto.getPassword());
         model.setAccount(accountService.create(model));
+        model.setPassword(DigestUtils.sha256Hex(dto.getPassword()));
         model = this.repository.save(model);
         CreatedUserDto response = new CreatedUserDto();
         response.setId(model.getId());
