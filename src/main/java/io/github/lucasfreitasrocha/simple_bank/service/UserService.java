@@ -39,6 +39,11 @@ public class UserService {
 
     private UserModel validationCreate(CreateUserDto dto) {
         handlerErrorService.init();
+
+        if(!EmailValidator.isValidEmail(dto.getEmail())){
+            handlerErrorService.addFieldError("email", "informe um email valido");
+        }
+
         UserModel model = repository.findByEmailOrDocument(dto.getEmail(), dto.getDocument());
         if (Objects.nonNull(model)) {
             if (dto.getEmail().equals(model.getEmail())) {
