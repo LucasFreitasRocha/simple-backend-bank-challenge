@@ -1,33 +1,32 @@
 package io.github.lucasfreitasrocha.simple_bank.model;
 
-
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.math.BigDecimal;
+
 @Entity
-@Table(name = "bank_user")
+@Table(name = "bank_account")
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-public class UserModel {
+public class AccountModel {
 
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
     private Long id;
-    private String name;
-    @Enumerated(EnumType.STRING)
-    private UserType type;
-    @Column(unique = true)
-    private String document;
-    @Column(unique = true)
-    private String email;
-    private String password;
-    @OneToOne(mappedBy = "owner")
-    private AccountModel account;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private UserModel owner;
+    private BigDecimal balance;
+
+
+    public AccountModel(UserModel owner) {
+        this.balance = BigDecimal.ZERO;
+        this.owner = owner;
+    }
 }

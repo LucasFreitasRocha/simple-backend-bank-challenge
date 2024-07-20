@@ -15,5 +15,5 @@ public class CreateUserDto {
     private String document;
     private String email;
     private String password;
-    private UserType type;
+    private String type;
 }
