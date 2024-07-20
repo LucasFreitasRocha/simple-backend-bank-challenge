@@ -6,6 +6,7 @@ import io.github.lucasfreitasrocha.simple_bank.exception.HandlerErrorService;
 import io.github.lucasfreitasrocha.simple_bank.model.UserModel;
 import io.github.lucasfreitasrocha.simple_bank.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -21,13 +22,11 @@ public class UserService {
 
 
         UserModel model = validationCreate(dto);
-
-
         model.setName(dto.getName());
         model.setDocument(dto.getDocument());
         model.setEmail(dto.getEmail());
         model.setType(dto.getType());
-        model.setPassword(dto.getPassword());
+        model.setPassword(DigestUtils.sha256Hex(dto.getPassword()));
         model = this.repository.save(model);
         CreatedUserDto response = new CreatedUserDto();
         response.setId(model.getId());
@@ -48,11 +47,7 @@ public class UserService {
                 handlerErrorService.addFieldError("document", "esse documento já existe");
             }
         }
-
-
         handlerErrorService.handle();
-
-
-        return model;
+        return new UserModel();
     }
 }
