@@ -23,10 +23,9 @@ public class UserUseCase implements UserGateway {
     @Override
     public UserDomain create(UserDomain domain) {
         validationCreate(domain);
-        domain.setAccount(accountUseCase.create(domain));
-        domain.setId(domain.getAccount().getId());
         domain.setPassword(DigestUtils.sha256Hex(domain.getPassword()));
-        return this.repository.save(domain);
+        domain.setAccount(accountUseCase.create(domain));
+        return domain;
     }
 
     @Override

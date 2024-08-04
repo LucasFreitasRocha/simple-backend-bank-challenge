@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TransferDomain {
+    private Long id;
     private UserDomain payer;
     private UserDomain payee;
     private BigDecimal value;

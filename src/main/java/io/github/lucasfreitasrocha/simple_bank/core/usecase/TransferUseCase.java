@@ -31,10 +31,10 @@ public class TransferUseCase implements TranferGateway {
     @Transactional
     public TransferDomain transferValue(TransferDomain domain) {
         handlerErrorService.init();
-        UserDomain payer = userUseCase.findById(domain.getPayer().getId());
-        UserDomain payee = userUseCase.findById(domain.getPayee().getId());
-        valaditionPayer(payer, domain.getValue());
-        payee.getAccount().setBalance(payee.getAccount().getBalance().add(domain.getValue()));
+        domain.setPayer( userUseCase.findById(domain.getPayer().getId()));
+        domain.setPayee( userUseCase.findById(domain.getPayee().getId()));
+        valaditionPayer(domain);
+        domain.getPayee().getAccount().setBalance(domain.getPayee().getAccount().getBalance().add(domain.getValue()));
 
         if (!getAuth()) {
             userUnauthorized();
@@ -68,16 +68,16 @@ public class TransferUseCase implements TranferGateway {
         this.handlerErrorService.handle();
     }
 
-    private void valaditionPayer(UserDomain payer, BigDecimal value) {
-        if (payer.getType().equals(UserTypeEntity.PJ)) {
+    private void valaditionPayer( TransferDomain domain) {
+        if (domain.getPayer().getType().equals(UserTypeEntity.PJ)) {
             handlerErrorService.addFieldError("OperationNotPermit", "você não pode fazer essa operação");
         }
-        BigDecimal balance = payer.getAccount().getBalance();
-        BigDecimal result = balance.subtract(value);
+        BigDecimal balance = domain.getPayer().getAccount().getBalance();
+        BigDecimal result = balance.subtract(domain.getValue());
         if (result.compareTo(BigDecimal.ZERO) == -1) {
             handlerErrorService.addFieldError("OperationNotPermit", "Saldo insuficiente");
         } else {
-            payer.getAccount().setBalance(result);
+            domain.getPayer().getAccount().setBalance(result);
         }
 
         handlerErrorService.handle();

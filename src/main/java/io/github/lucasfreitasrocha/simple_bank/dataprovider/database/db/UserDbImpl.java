@@ -1,29 +1,44 @@
 package io.github.lucasfreitasrocha.simple_bank.dataprovider.database.db;
 
 import io.github.lucasfreitasrocha.simple_bank.core.domain.UserDomain;
+import io.github.lucasfreitasrocha.simple_bank.core.domain.UserTypeDomain;
 import io.github.lucasfreitasrocha.simple_bank.core.gateway.UserDbRepository;
-import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.mapper.UserMapperDb;
+import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.entity.UserEntity;
+import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.entity.UserTypeEntity;
+import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.mapper.AccountMapper;
+import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.mapper.TransferMapper;
+import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.mapper.UserMapper;
 import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.Objects;
 
 @Component
 @AllArgsConstructor
 public class UserDbImpl implements UserDbRepository {
     private final UserRepository repository;
-    private final UserMapperDb mapper;
+    private final UserMapper userMapper;
+
     @Override
     public UserDomain save(UserDomain domain) {
-        return mapper.toDomain(repository.save(mapper.toEntity(domain)));
+        return userMapper.userEntityToUserDomain(repository.save(userMapper.userDomainToUserEntity(domain)));
     }
+
 
     @Override
     public UserDomain findById(Long id) {
-        return mapper.toDomain(repository.getReferenceById(id));
+        UserEntity entity = repository.getReferenceById(id);
+        return userMapper.userEntityToUserDomain(entity);
     }
 
     @Override
     public UserDomain findByEmailOrDocument(String email, String document) {
-        return mapper.toDomain(repository.findByEmailOrDocument(email,document));
+        return userMapper.userEntityToUserDomain(repository.findByEmailOrDocument(email, document));
     }
+
+
+
+
+
 }
