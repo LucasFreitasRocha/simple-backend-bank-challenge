@@ -21,6 +21,5 @@ public class UserDomain {
     private String email;
     private String password;
     private AccountDomain account;
-    private List<TransferDomain> payments;
-    private List<TransferDomain> receipts;
+
 }

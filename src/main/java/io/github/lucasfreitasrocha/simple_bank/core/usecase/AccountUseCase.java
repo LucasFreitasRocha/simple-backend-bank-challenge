@@ -6,6 +6,7 @@ import io.github.lucasfreitasrocha.simple_bank.core.gateway.AccountDbGateway;
 import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.entity.AccountEntity;
 import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.entity.UserEntity;
 import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.repository.AccountRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,4 +18,6 @@ public class AccountUseCase {
     public AccountDomain create(UserDomain domain){
         return this.dbGateway.save(new AccountDomain(domain));
     }
+
+
 }

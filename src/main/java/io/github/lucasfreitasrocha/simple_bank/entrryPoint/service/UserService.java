@@ -33,10 +33,6 @@ public class UserService {
         response.setName(domain.getName());
         response.setReceipts(new ArrayList<>());
         response.setPayments(new ArrayList<>());
-        domain.getPayments().forEach(transferModel -> {
-            response.getPayments().add(transferModel.getValue());
-        });
-        domain.getReceipts().forEach(transferModel -> response.getReceipts().add(transferModel.getValue()));
         return response;
     }
 }

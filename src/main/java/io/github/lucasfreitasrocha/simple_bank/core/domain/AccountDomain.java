@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,6 +18,8 @@ public class AccountDomain {
     private Long id;
     private UserDomain owner;
     private BigDecimal balance;
+    private List<TransferDomain> payments;
+    private List<TransferDomain> receipts;
 
 
     public AccountDomain(UserDomain owner) {

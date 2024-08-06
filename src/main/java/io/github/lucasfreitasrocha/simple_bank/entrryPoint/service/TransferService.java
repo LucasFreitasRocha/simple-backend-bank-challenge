@@ -22,8 +22,8 @@ public class TransferService {
 
     private void makeTransfer(TransferDto transferDto) {
         TransferDomain domain = new TransferDomain();
-        domain.setPayer(userGateway.findById(transferDto.getPayer()));
-        domain.setPayee(userGateway.findById(transferDto.getPayee()));
+        domain.setPayer(userGateway.findById(transferDto.getPayer()).getAccount());
+        domain.setPayee(userGateway.findById(transferDto.getPayee()).getAccount());
         domain.setValue(transferDto.getValue());
         tranferGateway.transferValue(domain);
     }

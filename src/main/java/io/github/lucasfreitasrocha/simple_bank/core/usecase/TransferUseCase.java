@@ -2,12 +2,10 @@ package io.github.lucasfreitasrocha.simple_bank.core.usecase;
 
 import feign.FeignException;
 import io.github.lucasfreitasrocha.simple_bank.core.domain.TransferDomain;
-import io.github.lucasfreitasrocha.simple_bank.core.domain.UserDomain;
+import io.github.lucasfreitasrocha.simple_bank.core.exception.HandlerErrorService;
 import io.github.lucasfreitasrocha.simple_bank.core.gateway.TranferGateway;
 import io.github.lucasfreitasrocha.simple_bank.core.gateway.TransferDbGateway;
 import io.github.lucasfreitasrocha.simple_bank.dataprovider.client.AuthClient;
-import io.github.lucasfreitasrocha.simple_bank.core.exception.HandlerErrorService;
-import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.entity.UserEntity;
 import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.entity.UserTypeEntity;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -31,16 +29,11 @@ public class TransferUseCase implements TranferGateway {
     @Transactional
     public TransferDomain transferValue(TransferDomain domain) {
         handlerErrorService.init();
-        domain.setPayer( userUseCase.findById(domain.getPayer().getId()));
-        domain.setPayee( userUseCase.findById(domain.getPayee().getId()));
         valaditionPayer(domain);
-        domain.getPayee().getAccount().setBalance(domain.getPayee().getAccount().getBalance().add(domain.getValue()));
-
         if (!getAuth()) {
             userUnauthorized();
         }
         domain = this.repo.save(domain);
-//        throw  new RuntimeException("teste");
         return domain;
     }
 
@@ -68,21 +61,21 @@ public class TransferUseCase implements TranferGateway {
         this.handlerErrorService.handle();
     }
 
-    private void valaditionPayer( TransferDomain domain) {
-        if (domain.getPayer().getType().equals(UserTypeEntity.PJ)) {
+    private void valaditionPayer(TransferDomain domain) {
+        if (domain.getPayer().getOwner().getType().equals(UserTypeEntity.PJ)) {
             handlerErrorService.addFieldError("OperationNotPermit", "você não pode fazer essa operação");
         }
-        BigDecimal balance = domain.getPayer().getAccount().getBalance();
+        BigDecimal balance = domain.getPayer().getBalance();
         BigDecimal result = balance.subtract(domain.getValue());
         if (result.compareTo(BigDecimal.ZERO) == -1) {
             handlerErrorService.addFieldError("OperationNotPermit", "Saldo insuficiente");
         } else {
-            domain.getPayer().getAccount().setBalance(result);
+            domain.getPayer().setBalance(result);
+            domain.getPayee().setBalance(domain.getPayee().getBalance().add(domain.getValue()));
         }
 
         handlerErrorService.handle();
     }
-
 
 
 }

@@ -1,6 +1,7 @@
 package io.github.lucasfreitasrocha.simple_bank.dataprovider.database.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,11 +35,6 @@ public class UserEntity {
     private String password;
     @OneToOne(mappedBy = "owner")
     private AccountEntity account;
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(mappedBy = "payer")
-    private List<TransferEntity> payments;
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(mappedBy = "payee")
-    private List<TransferEntity> receipts;
+
 }
 

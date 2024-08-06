@@ -5,7 +5,10 @@ import io.github.lucasfreitasrocha.simple_bank.core.gateway.AccountDbGateway;
 import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.entity.AccountEntity;
 import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.entity.UserEntity;
 import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.entity.UserTypeEntity;
+import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.mapper.AccountMapperDb;
+import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.mapper.CycleAvoidingMappingContext;
 import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.repository.AccountRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -13,28 +16,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class AccountDbImpl implements AccountDbGateway {
     private final AccountRepository repository;
-
+    private final AccountMapperDb mapper;
+    private final CycleAvoidingMappingContext context;
 
     @Override
     public AccountDomain save(AccountDomain accountDomain) {
-       AccountEntity entity = repository.save(toEntity(accountDomain));
-       return toDomain(entity,accountDomain);
+       AccountEntity entity = repository.save(mapper.toEntity(accountDomain, context));
+       return mapper.toDomain(entity,context);
     }
 
-    private AccountDomain toDomain(AccountEntity entity, AccountDomain domain) {
-        domain.setId(entity.getId());
-        domain.getOwner().setId(entity.getOwner().getId());
-        domain.setBalance(entity.getBalance());
-        return domain;
-    }
 
-    private AccountEntity toEntity(AccountDomain accountDomain) {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setName(accountDomain.getOwner().getName());
-        userEntity.setEmail(accountDomain.getOwner().getEmail());
-        userEntity.setDocument(accountDomain.getOwner().getDocument());
-        userEntity.setType(UserTypeEntity.getFromName(accountDomain.getOwner().getType().toString()));
-        userEntity.setPassword(accountDomain.getOwner().getPassword());
-       return new AccountEntity(userEntity);
-    }
 }
