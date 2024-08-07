@@ -23,7 +23,8 @@ public class AccountUseCase implements AccountGateway {
     private final BalanceValidator balanceValidator;
     private final HandlerErrorService handlerErrorService;
     private final AuthGateway authGateway;
-    public AccountDomain create(UserDomain domain){
+
+    public AccountDomain create(UserDomain domain) {
         return this.dbGateway.save(new AccountDomain(domain));
     }
 
@@ -31,7 +32,7 @@ public class AccountUseCase implements AccountGateway {
     @Override
     public void deposit(AccountDomain domain, BigDecimal value) {
         validateValue(value);
-        if(!authGateway.isAuthorized()){
+        if (!authGateway.isAuthorized()) {
             balanceValidator.unauthorized(handlerErrorService);
         }
         domain.setBalance(domain.getBalance().add(value));
@@ -42,7 +43,7 @@ public class AccountUseCase implements AccountGateway {
     @Override
     public void withdraw(AccountDomain domain, BigDecimal value) {
         validateValue(value);
-        if(!authGateway.isAuthorized()){
+        if (!authGateway.isAuthorized()) {
             balanceValidator.unauthorized(handlerErrorService);
         }
         BigDecimal response = domain.getBalance().subtract(value);
@@ -56,7 +57,7 @@ public class AccountUseCase implements AccountGateway {
 
     private void validateValue(BigDecimal value) {
         handlerErrorService.init();
-        if(value.compareTo(BigDecimal.ZERO) == -1 ){
+        if (value.compareTo(BigDecimal.ZERO) == -1) {
             handlerErrorService.addError("Não permitido operacao com esse valor");
         }
 
@@ -67,7 +68,7 @@ public class AccountUseCase implements AccountGateway {
     public AccountDomain find(Long id) {
         handlerErrorService.init();
         AccountDomain domain = dbGateway.find(id);
-        if(Objects.isNull(domain)){
+        if (Objects.isNull(domain)) {
             handlerErrorService.addError("conta %s not found".formatted(id));
             handlerErrorService.addHttpStatus(HttpStatus.NOT_FOUND);
             handlerErrorService.handle();

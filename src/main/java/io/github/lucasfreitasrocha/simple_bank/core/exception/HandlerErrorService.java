@@ -7,25 +7,29 @@ import org.springframework.stereotype.Service;
 public class HandlerErrorService {
 
     private HandlerErrorModel handlerErrorModel;
-    public HandlerErrorService init(){
+
+    public HandlerErrorService init() {
         handlerErrorModel = new HandlerErrorModel();
         return this;
     }
 
-    public HandlerErrorService addError(String message){
+    public HandlerErrorService addError(String message) {
         this.handlerErrorModel.getErrors().add(new ErrorModel("error:", message));
         return this;
     }
-    public HandlerErrorService addFieldError(String field, String message){
+
+    public HandlerErrorService addFieldError(String field, String message) {
         this.handlerErrorModel.getErrors().add(new ErrorModel(field, message));
         return this;
     }
-    public HandlerErrorService addHttpStatus(HttpStatus status){
+
+    public HandlerErrorService addHttpStatus(HttpStatus status) {
         this.handlerErrorModel.setStatus(status);
         return this;
     }
-    public void handle(){
-        if(!this.handlerErrorModel.getErrors().isEmpty()){
+
+    public void handle() {
+        if (!this.handlerErrorModel.getErrors().isEmpty()) {
             throw new HandlerException(this.handlerErrorModel);
         }
     }

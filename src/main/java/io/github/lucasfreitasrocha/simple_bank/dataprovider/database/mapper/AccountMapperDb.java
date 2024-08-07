@@ -8,7 +8,8 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface AccountMapperDb {
-    AccountDomain toDomain(AccountEntity entity,  @Context CycleAvoidingMappingContext cycleAvoidingMappingContext);
+    AccountDomain toDomain(AccountEntity entity, @Context CycleAvoidingMappingContext cycleAvoidingMappingContext);
+
     @InheritInverseConfiguration
-    AccountEntity toEntity(AccountDomain domain,  @Context CycleAvoidingMappingContext cycleAvoidingMappingContext);
+    AccountEntity toEntity(AccountDomain domain, @Context CycleAvoidingMappingContext cycleAvoidingMappingContext);
 }

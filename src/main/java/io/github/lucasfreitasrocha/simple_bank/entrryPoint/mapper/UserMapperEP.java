@@ -9,6 +9,7 @@ import org.mapstruct.Mapper;
 public interface UserMapperEP {
 
     CreatedUserDto toDtoCreated(UserDomain domain);
+
     UserDomain toDomain(CreateUserDto dto);
 }
 

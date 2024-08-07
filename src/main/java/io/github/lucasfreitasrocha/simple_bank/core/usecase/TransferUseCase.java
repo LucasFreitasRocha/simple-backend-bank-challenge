@@ -37,7 +37,6 @@ public class TransferUseCase implements TranferGateway {
     }
 
 
-
     private void valaditionPayer(TransferDomain domain) {
         if (domain.getPayer().getOwner().getType().equals(UserTypeEntity.PJ)) {
             handlerErrorService.addFieldError("OperationNotPermit", "você não pode fazer essa operação");
@@ -45,7 +44,7 @@ public class TransferUseCase implements TranferGateway {
         BigDecimal balance = domain.getPayer().getBalance();
         BigDecimal result = balance.subtract(domain.getValue());
         if (result.compareTo(BigDecimal.ZERO) == -1) {
-           balanceValidator.insufficientBalance(handlerErrorService);
+            balanceValidator.insufficientBalance(handlerErrorService);
         } else {
             domain.getPayer().setBalance(result);
             domain.getPayee().setBalance(domain.getPayee().getBalance().add(domain.getValue()));

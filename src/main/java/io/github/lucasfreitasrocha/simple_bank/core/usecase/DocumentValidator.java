@@ -12,7 +12,7 @@ public class DocumentValidator {
         int digit;
         int coeficient;
         int sum;
-        int[] foundDv = { 0, 0 };
+        int[] foundDv = {0, 0};
 
         int dv1 = Integer.parseInt(String.valueOf(cpf.charAt(cpf.length() - 2)));
         int dv2 = Integer.parseInt(String.valueOf(cpf.charAt(cpf.length() - 1)));
@@ -36,6 +36,7 @@ public class DocumentValidator {
 
         return dv1 == foundDv[0] && dv2 == foundDv[1];
     }
+
     public static boolean isCnpj(String cnpj) {
         if (cnpj.equals("00000000000000") || cnpj.length() != 14) {
             return false;
@@ -46,7 +47,7 @@ public class DocumentValidator {
         int digit;
         int coeficient;
         int sum;
-        int[] foundDv = { 0, 0 };
+        int[] foundDv = {0, 0};
 
         int dv1 = Integer.parseInt(String.valueOf(cnpj.charAt(cnpj.length() - 2)));
         int dv2 = Integer.parseInt(String.valueOf(cnpj.charAt(cnpj.length() - 1)));

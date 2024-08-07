@@ -9,7 +9,8 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface UserMapperDb {
 
-    UserDomain toDomain(UserEntity entity,  @Context CycleAvoidingMappingContext cycleAvoidingMappingContext);
+    UserDomain toDomain(UserEntity entity, @Context CycleAvoidingMappingContext cycleAvoidingMappingContext);
+
     @InheritInverseConfiguration
-    UserEntity toEntity(UserDomain domain,  @Context CycleAvoidingMappingContext cycleAvoidingMappingContext);
+    UserEntity toEntity(UserDomain domain, @Context CycleAvoidingMappingContext cycleAvoidingMappingContext);
 }

@@ -5,7 +5,6 @@ import io.github.lucasfreitasrocha.simple_bank.core.domain.UserTypeDomain;
 import io.github.lucasfreitasrocha.simple_bank.core.exception.HandlerErrorService;
 import io.github.lucasfreitasrocha.simple_bank.core.gateway.UserDbRepository;
 import io.github.lucasfreitasrocha.simple_bank.core.gateway.UserGateway;
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.http.HttpStatus;

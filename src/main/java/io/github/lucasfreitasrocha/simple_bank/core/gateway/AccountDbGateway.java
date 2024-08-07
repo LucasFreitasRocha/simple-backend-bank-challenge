@@ -5,5 +5,6 @@ import io.github.lucasfreitasrocha.simple_bank.core.domain.AccountDomain;
 public interface AccountDbGateway {
 
     AccountDomain save(AccountDomain accountDomain);
+
     AccountDomain find(Long id);
 }

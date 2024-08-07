@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class TransferController {
 
-   private final TransferService service;
+    private final TransferService service;
 
     @PostMapping
-    public ResponseEntity<TransferDto> transferValue(@RequestBody TransferDto transferDto){
-        return  ResponseEntity.status(HttpStatus.ACCEPTED).body(service.transferValue(transferDto));
+    public ResponseEntity<TransferDto> transferValue(@RequestBody TransferDto transferDto) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(service.transferValue(transferDto));
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class ControllerExceptionHandler  {
+public class ControllerExceptionHandler {
 
     @ExceptionHandler(HandlerException.class)
     public ResponseEntity<HandlerErrorModel> handler(HandlerException e, HttpServletRequest req) {
@@ -19,7 +19,7 @@ public class ControllerExceptionHandler  {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<HandlerErrorModel> othersExpections(Exception e, HttpServletRequest req){
+    public ResponseEntity<HandlerErrorModel> othersExpections(Exception e, HttpServletRequest req) {
         HandlerErrorModel model = new HandlerErrorModel();
         model.getErrors().add(new ErrorModel(HttpStatus.INTERNAL_SERVER_ERROR.toString(), e.getMessage()));
         model.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);

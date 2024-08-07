@@ -20,7 +20,7 @@ public class AuthClientImpl implements AuthGateway {
             response = authClient.getAuth().getData().isAuthorization();
         } catch (FeignException e) {
             if (e.status() == 403) {
-               response = false;
+                response = false;
             } else {
                 log.error("ocorreu um erro ao chamar o autorizado" + e.getMessage());
                 e.printStackTrace();

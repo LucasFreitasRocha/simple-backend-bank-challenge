@@ -9,7 +9,8 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface TransferMapperDb {
 
-    TransferDomain toDomain(TransferEntity entity,  @Context CycleAvoidingMappingContext cycleAvoidingMappingContext);
+    TransferDomain toDomain(TransferEntity entity, @Context CycleAvoidingMappingContext cycleAvoidingMappingContext);
+
     @InheritInverseConfiguration
-    TransferEntity toEntity(TransferDomain domain,  @Context CycleAvoidingMappingContext cycleAvoidingMappingContext);
+    TransferEntity toEntity(TransferDomain domain, @Context CycleAvoidingMappingContext cycleAvoidingMappingContext);
 }

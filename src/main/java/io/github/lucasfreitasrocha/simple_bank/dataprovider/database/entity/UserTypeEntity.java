@@ -8,14 +8,14 @@ public enum UserTypeEntity {
     PF("PF"),
     PJ("PJ");
 
+    private String name;
+
     UserTypeEntity(String type) {
     }
 
-    private String name;
-
-    public static UserTypeEntity getFromName(String name){
-        for(UserTypeEntity userTypeEntity: values()){
-            if(userTypeEntity.toString().equals(name)){
+    public static UserTypeEntity getFromName(String name) {
+        for (UserTypeEntity userTypeEntity : values()) {
+            if (userTypeEntity.toString().equals(name)) {
                 return userTypeEntity;
             }
         }

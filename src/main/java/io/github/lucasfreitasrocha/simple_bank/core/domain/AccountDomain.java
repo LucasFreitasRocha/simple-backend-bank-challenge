@@ -1,6 +1,5 @@
 package io.github.lucasfreitasrocha.simple_bank.core.domain;
 
-import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

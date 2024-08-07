@@ -15,6 +15,7 @@ public class UserDbImpl implements UserDbRepository {
     private final UserRepository repository;
     private final UserMapperDb mapper;
     private final CycleAvoidingMappingContext context;
+
     @Override
     public UserDomain save(UserDomain domain) {
         return mapper.toDomain(repository.save(mapper.toEntity(domain, context)), context);

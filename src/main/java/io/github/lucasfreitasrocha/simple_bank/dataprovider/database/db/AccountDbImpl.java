@@ -3,12 +3,9 @@ package io.github.lucasfreitasrocha.simple_bank.dataprovider.database.db;
 import io.github.lucasfreitasrocha.simple_bank.core.domain.AccountDomain;
 import io.github.lucasfreitasrocha.simple_bank.core.gateway.AccountDbGateway;
 import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.entity.AccountEntity;
-import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.entity.UserEntity;
-import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.entity.UserTypeEntity;
 import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.mapper.AccountMapperDb;
 import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.mapper.CycleAvoidingMappingContext;
 import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.repository.AccountRepository;
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -21,8 +18,8 @@ public class AccountDbImpl implements AccountDbGateway {
 
     @Override
     public AccountDomain save(AccountDomain accountDomain) {
-       AccountEntity entity = repository.save(mapper.toEntity(accountDomain, context));
-       return mapper.toDomain(entity,context);
+        AccountEntity entity = repository.save(mapper.toEntity(accountDomain, context));
+        return mapper.toDomain(entity, context);
     }
 
     @Override

@@ -15,14 +15,14 @@ public class AccountController {
     private final AccountService service;
 
     @PostMapping("/deposit/{id}")
-    public ResponseEntity<Void> deposit(@PathVariable Long id, @RequestBody BalanceDto balanceDto){
-        service.deposit(id,balanceDto);
+    public ResponseEntity<Void> deposit(@PathVariable Long id, @RequestBody BalanceDto balanceDto) {
+        service.deposit(id, balanceDto);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
     @PostMapping("/withdraw/{id}")
-    public ResponseEntity<Void> withdraw(@PathVariable Long id, @RequestBody BalanceDto balanceDto){
-        service.withdraw(id,balanceDto);
+    public ResponseEntity<Void> withdraw(@PathVariable Long id, @RequestBody BalanceDto balanceDto) {
+        service.withdraw(id, balanceDto);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 

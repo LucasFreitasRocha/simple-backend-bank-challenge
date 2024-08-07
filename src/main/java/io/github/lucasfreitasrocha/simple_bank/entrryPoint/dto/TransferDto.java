@@ -1,6 +1,5 @@
 package io.github.lucasfreitasrocha.simple_bank.entrryPoint.dto;
 
-import io.github.lucasfreitasrocha.simple_bank.core.domain.TransferDomain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -18,8 +18,6 @@ public class UserService {
     private final UserMapperEP mapper;
 
 
-
-
     public CreatedUserDto create(CreateUserDto dto) {
         return mapper.toDtoCreated(gateway.create(mapper.toDomain(dto)));
     }
