@@ -25,5 +25,10 @@ public class AccountDbImpl implements AccountDbGateway {
        return mapper.toDomain(entity,context);
     }
 
+    @Override
+    public AccountDomain find(Long id) {
+        return mapper.toDomain(repository.getReferenceById(id), context);
+    }
+
 
 }
