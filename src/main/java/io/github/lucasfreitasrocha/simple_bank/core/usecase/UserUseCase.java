@@ -27,6 +27,7 @@ public class UserUseCase implements UserGateway {
         validationCreate(domain);
         domain.setPassword(DigestUtils.sha256Hex(domain.getPassword()));
         domain.setAccount(accountUseCase.create(domain));
+        domain.setId(domain.getAccount().getOwner().getId());
         return domain;
     }
 
@@ -53,7 +54,7 @@ public class UserUseCase implements UserGateway {
             handlerErrorService.addFieldError("document", "informe um documento valido, cpf ou cnpj");
         }
         if (DocumentValidator.isCpf(domain.getDocument()) && !domain.getType().equals(UserTypeDomain.PF)) {
-            handlerErrorService.addFieldError("type/document", "informe o documento cpf de acordo com o tipo PF ");
+            handlerErrorService.addFieldError("type/document", "informe o documento cpf de acordo com o tipo PF");
         }
         if (DocumentValidator.isCnpj(domain.getDocument()) && !domain.getType().equals(UserTypeDomain.PJ)) {
             handlerErrorService.addFieldError("type/document", "informe o documento cnpj de acordo com o tipo PJ");

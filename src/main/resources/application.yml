@@ -1,0 +1,18 @@
+services:
+    auth:
+        url: ${AUTH_CLIENT_URL}
+spring:
+    application:
+        name: simple-bank
+    datasource:
+        url: ${DB_URL}
+        username: ${DB_USERNAME}
+        password: ${DB_PASSWORD}
+    jpa:
+        hibernate:
+            ddl-auto: ${DDL_AUTO}
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+                format_sql: true
+                show_sql: true

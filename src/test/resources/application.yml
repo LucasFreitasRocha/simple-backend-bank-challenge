@@ -1,0 +1,18 @@
+services:
+    auth:
+        url: localhost:7070
+spring:
+    application:
+        name: simple-bank
+    datasource:
+        url: ${DB_URL:jdbc:tc:postgresql:latest:///integration-tests-db}
+        username: ${DB_USERNAME}
+        password: ${DB_PASSWORD}
+    jpa:
+        hibernate:
+            ddl-auto: ${DDL_AUTO:update}
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+                format_sql: true
+                show_sql: true
