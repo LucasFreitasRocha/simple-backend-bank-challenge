@@ -1,4 +1,4 @@
-package io.github.lucasfreitasrocha.simple_bank.core.usecase;
+package io.github.lucasfreitasrocha.simple_bank.core.validator;
 
 
 import java.util.regex.Matcher;

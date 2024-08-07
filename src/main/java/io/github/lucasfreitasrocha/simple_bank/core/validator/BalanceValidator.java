@@ -1,4 +1,4 @@
-package io.github.lucasfreitasrocha.simple_bank.core.usecase;
+package io.github.lucasfreitasrocha.simple_bank.core.validator;
 
 import io.github.lucasfreitasrocha.simple_bank.core.exception.HandlerErrorService;
 import lombok.extern.slf4j.Slf4j;

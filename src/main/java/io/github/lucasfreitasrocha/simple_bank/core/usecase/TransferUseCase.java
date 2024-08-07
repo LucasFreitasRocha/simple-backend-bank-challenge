@@ -5,6 +5,7 @@ import io.github.lucasfreitasrocha.simple_bank.core.exception.HandlerErrorServic
 import io.github.lucasfreitasrocha.simple_bank.core.gateway.AuthGateway;
 import io.github.lucasfreitasrocha.simple_bank.core.gateway.TranferGateway;
 import io.github.lucasfreitasrocha.simple_bank.core.gateway.TransferDbGateway;
+import io.github.lucasfreitasrocha.simple_bank.core.validator.BalanceValidator;
 import io.github.lucasfreitasrocha.simple_bank.dataprovider.database.entity.UserTypeEntity;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;

@@ -6,6 +6,7 @@ import io.github.lucasfreitasrocha.simple_bank.core.exception.HandlerErrorServic
 import io.github.lucasfreitasrocha.simple_bank.core.gateway.AccountDbGateway;
 import io.github.lucasfreitasrocha.simple_bank.core.gateway.AccountGateway;
 import io.github.lucasfreitasrocha.simple_bank.core.gateway.AuthGateway;
+import io.github.lucasfreitasrocha.simple_bank.core.validator.BalanceValidator;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

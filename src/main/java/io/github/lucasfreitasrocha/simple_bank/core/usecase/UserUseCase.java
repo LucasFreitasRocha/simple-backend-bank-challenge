@@ -5,6 +5,8 @@ import io.github.lucasfreitasrocha.simple_bank.core.domain.UserTypeDomain;
 import io.github.lucasfreitasrocha.simple_bank.core.exception.HandlerErrorService;
 import io.github.lucasfreitasrocha.simple_bank.core.gateway.UserDbRepository;
 import io.github.lucasfreitasrocha.simple_bank.core.gateway.UserGateway;
+import io.github.lucasfreitasrocha.simple_bank.core.validator.DocumentValidator;
+import io.github.lucasfreitasrocha.simple_bank.core.validator.EmailValidator;
 import lombok.AllArgsConstructor;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.http.HttpStatus;

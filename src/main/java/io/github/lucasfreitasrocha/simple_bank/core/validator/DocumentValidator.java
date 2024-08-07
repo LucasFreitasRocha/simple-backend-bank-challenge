@@ -1,4 +1,4 @@
-package io.github.lucasfreitasrocha.simple_bank.core.usecase;
+package io.github.lucasfreitasrocha.simple_bank.core.validator;
 
 public class DocumentValidator {
     public static boolean isCpf(String cpf) {
