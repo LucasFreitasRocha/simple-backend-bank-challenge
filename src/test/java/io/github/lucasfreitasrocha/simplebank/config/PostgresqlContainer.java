@@ -1,5 +1,7 @@
 package io.github.lucasfreitasrocha.simplebank.config;
 
+import io.github.lucasfreitasrocha.simplebank.SimpleBankApplication;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Configuration;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
@@ -7,6 +9,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 @Configuration
 @Testcontainers
+@SpringBootTest(classes = SimpleBankApplication.class)
 public class PostgresqlContainer extends PostgreSQLContainer<PostgresqlContainer> {
     private static final String IMAGE_VERSION = "postgres:latest";
 

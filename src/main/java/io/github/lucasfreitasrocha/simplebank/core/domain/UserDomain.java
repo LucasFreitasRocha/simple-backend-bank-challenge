@@ -19,7 +19,7 @@ public class UserDomain {
     private String document;
     private String email;
     private String password;
-    @JsonManagedReference
+    @JsonManagedReference("owner")
     private AccountDomain account;
 
 }

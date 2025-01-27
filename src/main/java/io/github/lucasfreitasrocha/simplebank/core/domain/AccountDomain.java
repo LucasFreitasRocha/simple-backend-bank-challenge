@@ -1,10 +1,8 @@
 package io.github.lucasfreitasrocha.simplebank.core.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -16,10 +14,12 @@ import java.util.List;
 public class AccountDomain {
 
     private Long id;
-    @JsonBackReference
+    @JsonBackReference (value = "owner")
     private UserDomain owner;
     private BigDecimal balance;
+    @JsonBackReference (value = "transferDomain")
     private List<TransferDomain> payments;
+    @JsonBackReference (value = "transferDomain")
     private List<TransferDomain> receipts;
 
 
