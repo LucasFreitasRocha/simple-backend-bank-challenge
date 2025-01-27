@@ -15,9 +15,9 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class TransferDomain {
     private Long id;
-    @JsonManagedReference(value = "transferDomain")
+    @JsonManagedReference(value = "payer")
     private AccountDomain payer;
-    @JsonManagedReference(value = "transferDomain")
+    @JsonManagedReference(value = "payee")
     private AccountDomain payee;
     private BigDecimal value;
     private StatusPayment status;
@@ -27,8 +27,8 @@ public class TransferDomain {
     public String toString() {
         return "TransferDomain{" +
                 "id=" + id +
-                ", payer=" + payer.getOwner().getName() +
-                ", payee=" + payee.getOwner().getName() +
+                ", payer=" + payer +
+                ", payee=" + payee +
                 ", value=" + value +
                 ", status=" + status.toString() +
                 '}';

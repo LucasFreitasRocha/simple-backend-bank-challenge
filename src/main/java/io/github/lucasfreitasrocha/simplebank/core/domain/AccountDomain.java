@@ -17,14 +17,20 @@ public class AccountDomain {
     @JsonBackReference (value = "owner")
     private UserDomain owner;
     private BigDecimal balance;
-    @JsonBackReference (value = "transferDomain")
-    private List<TransferDomain> payments;
-    @JsonBackReference (value = "transferDomain")
-    private List<TransferDomain> receipts;
+
 
 
     public AccountDomain(UserDomain owner) {
         this.balance = BigDecimal.ZERO;
         this.owner = owner;
+    }
+
+    @Override
+    public String toString() {
+        return "AccountDomain{" +
+                "id=" + id +
+                ", owner=" + owner +
+                ", balance=" + balance +
+                '}';
     }
 }
