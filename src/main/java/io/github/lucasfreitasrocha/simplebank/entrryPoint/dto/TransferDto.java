@@ -1,9 +1,6 @@
 package io.github.lucasfreitasrocha.simplebank.entrryPoint.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -11,7 +8,9 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class TransferDto {
+    private String idTransaction;
     private Long payer;
     private Long payee;
     private BigDecimal value;

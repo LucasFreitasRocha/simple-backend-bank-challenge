@@ -4,4 +4,5 @@ import io.github.lucasfreitasrocha.simplebank.dataprovider.database.entity.Trans
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TransferRepository extends JpaRepository<TransferEntity, Long> {
+    TransferEntity findByIdTransaction(String idTransaction);
 }

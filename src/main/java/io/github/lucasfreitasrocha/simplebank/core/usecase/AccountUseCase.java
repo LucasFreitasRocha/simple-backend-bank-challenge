@@ -6,7 +6,7 @@ import io.github.lucasfreitasrocha.simplebank.core.exception.HandlerErrorService
 import io.github.lucasfreitasrocha.simplebank.core.gateway.AccountDbGateway;
 import io.github.lucasfreitasrocha.simplebank.core.gateway.AccountGateway;
 import io.github.lucasfreitasrocha.simplebank.core.gateway.AuthGateway;
-import io.github.lucasfreitasrocha.simplebank.core.validator.BalanceValidator;
+import io.github.lucasfreitasrocha.simplebank.core.validator.CommonValidator;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,7 +21,7 @@ public class AccountUseCase implements AccountGateway {
 
 
     private final AccountDbGateway dbGateway;
-    private final BalanceValidator balanceValidator;
+    private final CommonValidator balanceValidator;
     private final HandlerErrorService handlerErrorService;
     private final AuthGateway authGateway;
 
@@ -34,7 +34,7 @@ public class AccountUseCase implements AccountGateway {
     public void deposit(AccountDomain domain, BigDecimal value) {
         validateValue(value);
         if (!authGateway.isAuthorized()) {
-            balanceValidator.unauthorized(handlerErrorService);
+            balanceValidator.unauthorized();
         }
         domain.setBalance(domain.getBalance().add(value));
         dbGateway.save(domain);
@@ -45,7 +45,7 @@ public class AccountUseCase implements AccountGateway {
     public void withdraw(AccountDomain domain, BigDecimal value) {
         validateValue(value);
         if (!authGateway.isAuthorized()) {
-            balanceValidator.unauthorized(handlerErrorService);
+            balanceValidator.unauthorized();
         }
         BigDecimal response = domain.getBalance().subtract(value);
         if (response.compareTo(BigDecimal.ZERO) == -1) {

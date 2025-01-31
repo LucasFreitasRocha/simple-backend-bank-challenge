@@ -23,5 +23,10 @@ public class TransferDbImpl implements TransferDbGateway {
         return mapper.toDomain(this.repository.save(mapper.toEntity(domain, context)), context);
     }
 
+    @Override
+    public TransferDomain findByIdTransaction(String idTransaction) {
+        return mapper.toDomain(this.repository.findByIdTransaction(idTransaction), context);
+    }
+
 
 }

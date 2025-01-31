@@ -2,16 +2,16 @@ package io.github.lucasfreitasrocha.simplebank.core.usecase;
 
 import io.github.lucasfreitasrocha.simplebank.core.domain.TransferDomain;
 import io.github.lucasfreitasrocha.simplebank.core.exception.HandlerErrorService;
-import io.github.lucasfreitasrocha.simplebank.core.gateway.AuthGateway;
 import io.github.lucasfreitasrocha.simplebank.core.gateway.EventGateway;
 import io.github.lucasfreitasrocha.simplebank.core.gateway.InitTranferGateway;
 import io.github.lucasfreitasrocha.simplebank.core.gateway.TransferDbGateway;
-import io.github.lucasfreitasrocha.simplebank.core.validator.BalanceValidator;
 import io.github.lucasfreitasrocha.simplebank.dataprovider.database.entity.UserTypeEntity;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -21,8 +21,7 @@ public class initTransferUseCase implements InitTranferGateway {
 
     private final TransferDbGateway repo;
     private final HandlerErrorService handlerErrorService;
-    private final BalanceValidator balanceValidator;
-    private final AuthGateway authGateway;
+
     private final EventGateway eventGateway;
 
     @Override
@@ -30,9 +29,11 @@ public class initTransferUseCase implements InitTranferGateway {
     public TransferDomain initTrasnfer(TransferDomain domain) {
         handlerErrorService.init();
         validationTypePayer(domain);
+
 //        if (!authGateway.isAuthorized()) {
 //            balanceValidator.unauthorized(handlerErrorService);
 //        }
+        domain.setIdTransaction(UUID.randomUUID());
         domain = this.repo.save(domain);
         eventGateway.processTransfer(domain);
         return domain;

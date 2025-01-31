@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -15,12 +16,11 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class TransferDomain {
     private Long id;
-    @JsonManagedReference(value = "payer")
     private AccountDomain payer;
-    @JsonManagedReference(value = "payee")
     private AccountDomain payee;
     private BigDecimal value;
     private StatusPayment status;
+    private UUID idTransaction;
 
 
     @Override

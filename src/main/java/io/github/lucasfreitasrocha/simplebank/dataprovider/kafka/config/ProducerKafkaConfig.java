@@ -1,5 +1,6 @@
 package io.github.lucasfreitasrocha.simplebank.dataprovider.kafka.config;
 
+import io.github.lucasfreitasrocha.simplebank.entrryPoint.dto.TransferDto;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import io.github.lucasfreitasrocha.simplebank.core.domain.TransferDomain;
@@ -21,7 +22,7 @@ public class ProducerKafkaConfig {
     private String bootstrapAddress;
 
     @Bean
-    public ProducerFactory<String, TransferDomain> producerFactory() {
+    public ProducerFactory<String, TransferDto> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(
                 ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
@@ -36,7 +37,7 @@ public class ProducerKafkaConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, TransferDomain> kafkaTemplate() {
+    public KafkaTemplate<String, TransferDto> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 }

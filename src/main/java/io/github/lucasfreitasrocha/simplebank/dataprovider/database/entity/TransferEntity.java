@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -30,5 +31,6 @@ public class TransferEntity {
     private BigDecimal value;
     @Enumerated(EnumType.STRING)
     private StatusPayment status;
+    private UUID idTransaction;
 
 }

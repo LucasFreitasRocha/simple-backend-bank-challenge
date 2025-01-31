@@ -4,4 +4,6 @@ import io.github.lucasfreitasrocha.simplebank.core.domain.TransferDomain;
 
 public interface TransferDbGateway {
     TransferDomain save(TransferDomain domain);
+
+    TransferDomain findByIdTransaction(String idTransaction);
 }
